@@ -20,3 +20,11 @@ Url:- /api/campaigns, Time:- 22:37:10
 Url:- /api/campaigns, Time:- 22:37:35
 Url:- /api/contributions, Time:- 22:48:3
 Url:- /api/contributions, Time:- 22:48:19
+Url:- /api/users, Time:- 11:14:7
+Url:- /api/, Time:- 11:14:11
+Url:- /api/users/, Time:- 11:14:26
+Url:- /api/users/me, Time:- 11:14:54
+Url:- /api/users/register, Time:- 11:15:16
+Url:- /api/users/register, Time:- 11:15:19
+Url:- /api/users/register, Time:- 11:15:39
+Url:- /api/campaigns/, Time:- 11:15:53
