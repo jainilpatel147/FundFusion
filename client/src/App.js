@@ -1,29 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Header from './Components/Header';
-import ExploreCampaigns from './Components/ExploreCampaigns';
-// import CreateCampaign from './Components/CreateCampaign';
-import CampaignDetails from './Components/CampaignDetails';
+import { useState, createContext } from 'react';
+import Main from './Components/Main';
 import Login from './Components/Login';
-import Dashboard from './Components/Dashboard';
-import Footer from './Components/Footer';
-
+const userContext = createContext();
 function App() {
+  const [islogin , setlogin] = useState(false);
+
   return (
-    <Router>
-      <Header />
-      <div className="container mt-4">
-        <Routes>
-          <Route path="/" element={<ExploreCampaigns />} />
-          <Route path="/explore" element={<ExploreCampaigns />} />
-          {/* <Route path="/create" element={<CreateCampaign />} /> */}
-          <Route path="/campaign/:id" element={<CampaignDetails />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </div>
-      <Footer />
-    </Router>
+    <userContext.Provider value={islogin}>
+    {islogin? <Main/> : <Login/>}
+    </userContext.Provider>
   );
 }
 

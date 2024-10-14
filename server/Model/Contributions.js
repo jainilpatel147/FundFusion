@@ -19,8 +19,8 @@ const contributionSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     }
-});
+},{collection:'Contributions'});
 
-const Contributions = mongoose.model('Contribution', contributionSchema);
+const Contribution = mongoose.model('Contribution', contributionSchema);
 
-module.exports = Contributions;
+module.exports = Contribution;

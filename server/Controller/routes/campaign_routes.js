@@ -2,7 +2,8 @@ var express= require('express');
 var campaign = express.Router();
 var campaignData = require("../../Model/model");
 var fs = require('fs');
-
+const cors = require('cors');
+campaign.use(cors());
 const bodyParser = require('body-parser');
 campaign.use(bodyParser.json());
 campaign.use(bodyParser.urlencoded({extended:true}));
@@ -10,7 +11,7 @@ campaign.use(bodyParser.urlencoded({extended:true}));
 function log(req,res,next){
     var date = new Date();
     var log = "\nUrl:- "+ req.originalUrl + ", Time:- "+ date.getHours() +":"+date.getMinutes()+":"+ date.getSeconds();
-    fs.appendFileSync("api_log_campaign.txt",log);
+    fs.appendFileSync("./logs/api_log_campaign.txt",log);
     next();
 }
 

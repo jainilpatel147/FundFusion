@@ -1,16 +1,20 @@
 var express= require('express');
 var user = express.Router();
-var Model = require("../../Model/model");
+var userFunc = require("../lib/UserFunc");
 var fs = require('fs');
+const {body, validationResult} = require('express-validator');
 
 const bodyParser = require('body-parser');
 user.use(bodyParser.json());
 user.use(bodyParser.urlencoded({extended:true}));
 
+const cors = require('cors');
+user.use(cors());
+
 function log(req,res,next){
     var date = new Date();
     var log = "\nUrl:- "+ req.originalUrl + ", Time:- "+ date.getHours() +":"+date.getMinutes()+":"+ date.getSeconds();
-    fs.appendFileSync("api_log_user.txt",log);
+    fs.appendFileSync("./logs/api_log_user.txt",log);
     next();
 }
 
@@ -18,30 +22,41 @@ user.use(log);
 user
     .route("/me")
     .get((req,res) =>{
-        res.send("got route on /api/users/me (get)");
+        userFunc.getUser();
     })
     .put((req,res)=>{
-        res.send("got route on /api/users/me (put)");
+        const newUser = req.body;
+
+        userFunc.updateUser()
     })
 
 //Register the new user
-user.post('/register', async function(req,res){
+user.post('/register',[
+    body('email',"invalid email address").isEmail(),
+    body('name',"invalid Name").isLength({min:3 ,max:20}),
+    body('password',"inValid password").isLength({min:5})], 
+async function(req,res){
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors: errors.array()});
+    }
     const newUser = req.body;
-    try{
-        const user = await Model.Users.create({"name":newUser.name,"email":newUser.email,"password":newUser.password,"profilePicture":newUser.profilePicture});
-        await user.save();
-        res.send("user created successfully");
-    }
-    catch(e){
-        console.log(e.message);
-    }
+    var result = await userFunc.createUser(newUser.name,newUser.email,newUser.password,newUser.profilePicture);
+    console.log(result);
+    res.send("user created successfully");
+    
 });
 
-user.post('/login',function(req,res){
-    res.send('Got route on /api/users/login through');
+user.post('/login',async function(req,res){
+    const userReq = req.body;
+    var result = await userFunc.validateUser(userReq.name,userReq.password);
+    console.log(result);
+    res.json({"login" : true});
+    
 });
-user.delete('/:id',function(req,res){
-    res.send("Delete request found.. on user");
+user.delete('/:id',async function(req,res){
+    const userid= req.params.id;
+    var result = await userFunc.deleteUser(id);
 })
 
 module.exports= user;

@@ -1,4 +1,5 @@
 var mongoose=require('mongoose');
+const campaign = require('../Controller/routes/campaign_routes');
 
 const campaignSchema = new mongoose.Schema({
     title: {
@@ -32,8 +33,8 @@ const campaignSchema = new mongoose.Schema({
         default: 'active',
     },
    
-},{timestamps:true},{collection:'Campaigns'});
+},{collection:'Campaigns'});
 
-const Campaigns = mongoose.model('Campaign', campaignSchema);
+const Campaign = mongoose.model('Campaign', campaignSchema);
 
-module.exports = Campaigns;
+module.exports = Campaign;

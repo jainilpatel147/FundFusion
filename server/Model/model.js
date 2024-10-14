@@ -1,7 +1,7 @@
 var mongoose=require('mongoose');
 mongoose.connect('mongodb://localhost/FundFusion');
-const Users = require("./Users");
-const Campaigns = require("./Campaigns");
-const Contributions = require("./Contributions");
+const User = require("./Users");
+const Campaign = require("./Campaigns");
+const Contribution = require("./Contributions");
 
-module.exports= {Contributions,Campaigns,Users};
+module.exports= {Contribution,Campaign,User};

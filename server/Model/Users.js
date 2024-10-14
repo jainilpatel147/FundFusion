@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        unique : true,
     },
     email: {
         type: String,
@@ -28,7 +29,7 @@ const userSchema = new mongoose.Schema({
         default : () => Date.now(),
     }
     
-},{timestamps:true}, {collection:'Users'});
+}, {collection:'Users'});
 
-const Users = mongoose.model('User', userSchema);
-module.exports = Users;
+const User = mongoose.model('User', userSchema);
+module.exports = User;
