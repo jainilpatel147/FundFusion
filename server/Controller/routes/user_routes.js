@@ -14,7 +14,7 @@ user.use(cors());
 function log(req,res,next){
     var date = new Date();
     var log = "\nUrl:- "+ req.originalUrl + ", Time:- "+ date.getHours() +":"+date.getMinutes()+":"+ date.getSeconds();
-    fs.appendFileSync("./app_logs/api_log_user.txt",log);
+    fs.appendFileSync("./logs/api_log_user.txt",log);
     next();
 }
 
