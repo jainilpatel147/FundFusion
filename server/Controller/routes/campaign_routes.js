@@ -11,7 +11,7 @@ campaign.use(bodyParser.urlencoded({extended:true}));
 function log(req,res,next){
     var date = new Date();
     var log = "\nUrl:- "+ req.originalUrl + ", Time:- "+ date.getHours() +":"+date.getMinutes()+":"+ date.getSeconds();
-    fs.appendFileSync("./logs/api_log_campaign.txt",log);
+    fs.appendFileSync("./app_logs/api_log_campaign.txt",log);
     next();
 }
 
