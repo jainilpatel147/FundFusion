@@ -3,6 +3,10 @@ var contribution = express.Router();
 var contributionData = require("../../Model/model");
 var fs = require('fs');
 
+const bodyParser = require('body-parser');
+contribution.use(bodyParser.json());
+contribution.use(bodyParser.urlencoded({extended:true}));
+
 function log(req,res,next){
     var date = new Date();
     var log = "\nUrl:- "+ req.originalUrl + ", Time:- "+ date.getHours() +":"+date.getMinutes()+":"+ date.getSeconds();

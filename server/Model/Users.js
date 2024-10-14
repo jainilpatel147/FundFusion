@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+        lowercase : true,
     },
     password: {
         type: String,
@@ -17,11 +18,16 @@ const userSchema = new mongoose.Schema({
     profilePicture: {
         type: String,
     },
-    role: {
-        type: String,
-        enum: ['user', 'admin'],
-        default: 'user',
+    createdAt :{
+        type : Date,
+        default : () => Date.now(),
+        immutable : true,
     },
+    updatedAt :{
+        type : Date,
+        default : () => Date.now(),
+    }
+    
 },{timestamps:true}, {collection:'Users'});
 
 const Users = mongoose.model('User', userSchema);

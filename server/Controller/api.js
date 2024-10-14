@@ -24,27 +24,4 @@ api.use('/campaigns',campaign);
 var contribution = require("./routes/contributions_route");
 api.use("/contributions",contribution);
 
-
-// api.get('/users',function(req,res){
-//     UserData.find()
-//     .then((result)=>{
-//         res.render('Show_Users',{result});
-//     })
-//     .catch((result)=>{
-//         res.send("Cannot fetch the documents..");
-//     })
-// });
-// api.get('/users/:id',function(req,res){
-//     UserData.findById(req.params.id);
-// })
-// api.get('/campaings',function(req,res){
-//     res.send('Got route on /explore through');
-// });
-// api.get('/campaings/:title',function(req,res){
-//     res.send('Got route on /settings through');
-// });
-// api.get('/',function(req,res){
-//     res.send('Got route on /dashboard through');
-// });
-
 module.exports= api;

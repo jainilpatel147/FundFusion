@@ -3,6 +3,10 @@ var campaign = express.Router();
 var campaignData = require("../../Model/model");
 var fs = require('fs');
 
+const bodyParser = require('body-parser');
+campaign.use(bodyParser.json());
+campaign.use(bodyParser.urlencoded({extended:true}));
+
 function log(req,res,next){
     var date = new Date();
     var log = "\nUrl:- "+ req.originalUrl + ", Time:- "+ date.getHours() +":"+date.getMinutes()+":"+ date.getSeconds();

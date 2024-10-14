@@ -3,13 +3,18 @@ import CampaignCard from './CampaignCard';
 
 const ExploreCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
-
+  const url = "http://localhost:5000/";
+  const fetchInfo = () => {
+    return fetch(url)
+            .then((res) => res.json())
+            .then((d)=> setCampaigns(d))
+  }
   useEffect(() => {
-    // Fetch campaigns from API (dummy data for now)
-    setCampaigns([
-      { id: 1, title: 'Help Build a School', description: 'Support us in building a school.', goal: 10000, raised: 5000, image: '/path/to/image' },
-      { id: 2, title: 'Clean Water for All', description: 'Provide clean water to villages.', goal: 20000, raised: 12000, image: '/path/to/image' },
-    ]);
+    fetchInfo();
+    // setCampaigns([
+    //   { id: 1, title: 'Help Build a School', description: 'Support us in building a school.', goal: 10000, raised: 5000, image: '/path/to/image' },
+    //   { id: 2, title: 'Clean Water for All', description: 'Provide clean water to villages.', goal: 20000, raised: 12000, image: '/path/to/image' },
+    // ]);
   }, []);
 
   return (

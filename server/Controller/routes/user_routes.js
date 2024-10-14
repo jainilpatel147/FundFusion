@@ -1,7 +1,11 @@
 var express= require('express');
 var user = express.Router();
-var UserData = require("../../Model/model");
+var Model = require("../../Model/model");
 var fs = require('fs');
+
+const bodyParser = require('body-parser');
+user.use(bodyParser.json());
+user.use(bodyParser.urlencoded({extended:true}));
 
 function log(req,res,next){
     var date = new Date();
@@ -20,19 +24,19 @@ user
         res.send("got route on /api/users/me (put)");
     })
 
-// user.get('/users',function(req,res){
-//     UserData.find()
-//     .then((result)=>{
-//         res.render('Show_Users',{result});
-//     })
-//     .catch((result)=>{
-//         res.send("Cannot fetch the documents..");
-//     })
-// });
-user.post('/register',function(req,res){
-    // UserData.findById(req.params.id);
-    res.send("got route on /api/users/register");
-})
+//Register the new user
+user.post('/register', async function(req,res){
+    const newUser = req.body;
+    try{
+        const user = await Model.Users.create({"name":newUser.name,"email":newUser.email,"password":newUser.password,"profilePicture":newUser.profilePicture});
+        await user.save();
+        res.send("user created successfully");
+    }
+    catch(e){
+        console.log(e.message);
+    }
+});
+
 user.post('/login',function(req,res){
     res.send('Got route on /api/users/login through');
 });
